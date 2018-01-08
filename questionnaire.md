@@ -225,8 +225,86 @@
     1) Az újonnan előállt tömb elemeinek a típusa megegyezik a kiinduló tömb elemeinek a típusával.
     1) A `.filter()` mutálja a tömböt, amin meghívjuk.
 1) Mely állítások igazak a `.reduce(r[, i])` függvényre?
+    1) Az `r` függvény egy reducer.
     1) Ha nem adunk meg `i` paramétert, akkor az első akkumulált állapot a tömb első eleme lesz.
     1) Az `r` függvény olyan típussal kell visszatérjen, mint ami az `i` típusa.
     1) Az `r` függvény olyan típussal kell visszatérjen, mint a tömb elemeinek a típusa.
     1) Az eredmény mindig egy tömb lesz.
-    1) Az `r` függvény egy reducer.
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (a = 10) => { console.log(a) }
+    f()
+    ```
+    1) `undefined`
+    1) `10`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (a = 10) => { console.log(a) }
+    f(5)
+    ```
+    1) `5`
+    1) `10`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (a = 10) => { console.log(a) }
+    f(undefined)
+    ```
+    1) `undefined`
+    1) `10`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (a = 10) => { console.log(a) }
+    f(null)
+    ```
+    1) `undefined`
+    1) `null`
+    1) `10`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (...args) => { console.log(args) }
+    f(10, 20, 30)
+    ```
+    1) `[ 10, 20, 30 ]`
+    1) `10 20 30`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (...args) => { console.log(...args) }
+    f(10, 20, 30)
+    ```
+    1) `[ 10, 20, 30 ]`
+    1) `10 20 30`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (first, ...others) => { console.log([ first, ...others ]) }
+    f(...[10, 20], 30)
+    ```
+    1) `[ 10, 20, 30 ]`
+    1) `10 20 30`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (...args) => { console.log(args[0]) }
+    f()
+    ```
+    1) `[]`
+    1) `undefined`
+1) Mit logol az alábbi snippet?
+    ```js
+    const foo = 'bar'
+    console.log({ [foo]: 'foo' })
+    ```
+    1) `{ foo: 'foo' }`
+    1) `{ bar: 'foo' }`
+    1) `{ foo: 'bar' }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const name = 'pista'
+    console.log({ name })
+    ```
+    1) `{ name: 'name' }`
+    1) `{ name: 'pista' }`
+    1) `{ pista: 'pista' }`
+    1) Hibát dob
+1) Melyik esetben lesz a `this` undefined?
+    1) `{ f() { console.log(this) } }`
+    1) `{ f: function() { console.log(this) } }`
+    1) `{ f: () => { console.log(this) } }`
