@@ -596,6 +596,7 @@
     ```js
     Promise.reject(new Error('hiba'))
         .then(n => n + 1)
+        .then(n => console.log(n))
         .catch(e => console.log(e.message))
     ```
     1) `10`
@@ -612,5 +613,140 @@
     ```
     1) `10`
     1) `11`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    new Promise((resolve, reject) => reject(new Error('hiba')))
+        .then(n => n + 1)
+        .then(n => console.log(n))
+        .catch(e => console.log(e.message))
+    ```
+    1) `10`
+    1) `11`
+    1) `10 hiba`
+    1) `11 hiba`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    new Promise(resolve => resolve(new Error('hiba')))
+        .then(_ => _)
+        .then(e => console.log(e.message + '!'))
+        .catch(e => console.log(e.message))
+    ```
+    1) `hiba`
+    1) `hiba!`
+1) Mit logol az alábbi snippet?
+    ```js
+    new Promise(resolve => resolve(10))
+        .then(async n => n + 1)
+        .then(n => Promise.resolve(n + 1))
+        .then(n => console.log(n))
+    ```
+    1) `10`
+    1) `11`
+    1) `12`
+1) Mit logol az alábbi snippet?
+    ```js
+    new Promise(resolve => resolve(10))
+        .then(async n => { throw new Error('hiba') })
+        .then(n => Promise.resolve(n + 1))
+        .then(n => console.log(n))
+    ```
+    1) `10`
+    1) `11`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    new Promise(resolve => resolve(10))
+        .then(async n => { throw new Error('hiba') })
+        .then(n => Promise.resolve(n + 1))
+        .then(n => console.log(n))
+        .catch(e => e)
+        .catch(e => console.log(e.message))
+    ```
+    1) `10`
+    1) `11`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    new Promise(resolve => resolve(10))
+        .then(async n => { throw new Error('hiba') })
+        .then(n => Promise.resolve(n + 1))
+        .then(n => console.log(n))
+        .catch(e => { throw e })
+        .catch(e => console.log(e.message))
+    ```
+    1) `10`
+    1) `11`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = async n => n + 1
+    console.log(f(10) === 11)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = async () => 10
+    const g = async h => await h()
+    g(f).then(n => console.log(n === 10))
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = async () => {
+        throw new Error('hiba')
+        return 10
+    }
+
+    f()
+        .then(n => console.log(n))
+        .catch(e => console.log(e.message))
+    ```
+    1) `10`
+    1) `undefined`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = async () => { throw new Error('hiba') }
+
+    const g = async () => {
+        try {
+            f()
+            console.log(10)
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+    g()
+    ```
+    1) `10`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = async () => { throw new Error('hiba') }
+
+    const g = async () => {
+        try {
+            await f()
+            console.log(10)
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+    g()
+    ```
+    1) `10`
     1) `hiba`
     1) semmit
