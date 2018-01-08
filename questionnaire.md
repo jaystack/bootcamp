@@ -750,3 +750,39 @@
     1) `10`
     1) `hiba`
     1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = async () => { throw new Error('hiba') }
+
+    const g = async () => {
+        try {
+            await Promise.reject(new Error('hiba'))
+            console.log(10)
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+    g()
+    ```
+    1) `10`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = async () => { throw new Error('hiba') }
+
+    const g = async () => {
+        try {
+            await new Promise((resolve, reject) => reject(new Error('hiba')))
+            console.log(10)
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+    g()
+    ```
+    1) `10`
+    1) `hiba`
+    1) semmit
