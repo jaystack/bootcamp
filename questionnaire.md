@@ -9,6 +9,7 @@
     1) `Number`
     1) `Array`
     1) `RegExp`
+    1) `Symbol`
 1) Mit logol az alábbi snippet?
     ```js
     const o1 = { a: { b: 1 } }
@@ -307,4 +308,309 @@
 1) Melyik esetben lesz a `this` undefined?
     1) `{ f() { console.log(this) } }`
     1) `{ f: function() { console.log(this) } }`
+    1) `{ ['f']: function() { console.log(this) } }`
     1) `{ f: () => { console.log(this) } }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const name = 'pista'
+    const s = `My name is ${name}!`
+    console.log(s)
+    ```
+    1) `My name is ${name}!`
+    1) `My name is pista!`
+1) Mit logol az alábbi snippet?
+    ```js
+    for (const a in [10, 20, 30])
+        console.log(a)
+    ```
+    1)
+        - `10`
+        - `20`
+        - `30`
+    1)
+        - `0`
+        - `1`
+        - `2`
+1) Mit logol az alábbi snippet?
+    ```js
+    for (const a of [10, 20, 30])
+        console.log(a)
+    ```
+    1)
+        - `10`
+        - `20`
+        - `30`
+    1)
+        - `0`
+        - `1`
+        - `2`
+1) Igaz-e a `[ 10, 20, 30 ].includes(20)`
+    1) Igen
+    1) Nem
+1) Igaz-e a `[ 10, 20, 30 ].includes('20')`
+    1) Igen
+    1) Nem
+1) Igaz-e a `[ [], {} ].includes({})`
+    1) Igen
+    1) Nem
+1) Igaz-e a `[ [ 10, 20 ] ].includes(20)`
+    1) Igen
+    1) Nem
+1) Igaz-e a `Symbol === Symbol` kifejezés
+    1) Igen
+    1) Nem
+1) Igaz-e a `Symbol() === Symbol()` kifejezés
+    1) Igen
+    1) Nem
+1) Igaz-e a `Symbol('alma') === Symbol('alma')` kifejezés
+    1) Igen
+    1) Nem
+1) Igaz-e a `Symbol('alma') == Symbol('alma')` kifejezés
+    1) Igen
+    1) Nem
+1) Mit logol az alábbi snippet?
+    ```js
+    const A = Symbol()
+    const B = Symbol()
+    console.log(A === B)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const A = Symbol()
+    const B = A
+    console.log(A === B)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    let A = Symbol()
+    let B = A
+    A = Symbol()
+    console.log(A === B)
+    ```
+    1) `true`
+    1) `false`
+1) Igaz-e a `Number.isFinite(0)` kifejezés?
+    1) Igen
+    1) Nem
+1) Igaz-e a `Number.isFinite(1)` kifejezés?
+    1) Igen
+    1) Nem
+1) Igaz-e a `Number.isFinite(Infinity)` kifejezés?
+    1) Igen
+    1) Nem
+1) Igaz-e a `Number.isFinite(null)` kifejezés?
+    1) Igen
+    1) Nem
+1) Igaz-e a `Number.isFinite(undefined)` kifejezés?
+    1) Igen
+    1) Nem
+1) Mit logol az alábbi snippet?
+    ```js
+    const items = [
+        { id: 0 },
+        { id: 1 },
+        { id: 2 },
+        { id: undefined },
+        { id: null },
+        {}
+    ]
+    console.log(items.filter(item => item.id))
+    ```
+    1) `[ { id: 0 }, { id: 1 }, { id: 2 }, { id: undefined }, { id: null }, {} ]`
+    1) `[ { id: 0 }, { id: 1 }, { id: 2 }, { id: undefined }, { id: null } ]`
+    1) `[ { id: 0 }, { id: 1 }, { id: 2 } ]`
+    1) `[ { id: 1 }, { id: 2 } ]`
+1) Mit logol az alábbi snippet?
+    ```js
+    const items = [
+        { id: 0 },
+        { id: 1 },
+        { id: 2 },
+        { id: undefined },
+        { id: null },
+        {}
+    ]
+    console.log(items.filter(item => Number.isFinite(item.id)))
+    ```
+    1) `[ { id: 0 }, { id: 1 }, { id: 2 }, { id: undefined }, { id: null }, {} ]`
+    1) `[ { id: 0 }, { id: 1 }, { id: 2 }, { id: undefined }, { id: null } ]`
+    1) `[ { id: 0 }, { id: 1 }, { id: 2 } ]`
+    1) `[ { id: 1 }, { id: 2 } ]`
+1) Mit logol az alábbi snippet?
+    ```js
+    const [a, b, c] = [ 10, 20, 10 ]
+    console.log(a === c)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const [a, ...b] = [ 10, 20, 10 ]
+    console.log(a, b)
+    ```
+    1) `10 20 30`
+    1) `10 [ 20, 30 ]`
+1) Mit logol az alábbi snippet?
+    ```js
+    const [ , [a] ] = [ 10, [ 20, 30 ] ]
+    console.log(a)
+    ```
+    1) `[ 20, 30 ]`
+    1) `20`
+1) Mit logol az alábbi snippet?
+    ```js
+    const [ , [...a] ] = [ 10, [ 20, 30 ] ]
+    console.log(a)
+    ```
+    1) `[ 20, 30 ]`
+    1) `20`
+1) Mit logol az alábbi snippet?
+    ```js
+    const { a } = { a: 1, b: 2 }
+    console.log(a)
+    ```
+    1) `{ a: 1 }`
+    1) `1`
+1) Mit logol az alábbi snippet?
+    ```js
+    const { ...a } = { a: 1, b: 2 }
+    console.log(a)
+    ```
+    1) `{ a: 1 }`
+    1) `{ a: 1, b: 2 }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const { b, ...a } = { a: 1, b: 2 }
+    console.log(a)
+    ```
+    1) `{ a: 1 }`
+    1) `{ a: 1, b: 2 }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const { a: b } = { a: 1, b: 2 }
+    console.log(a)
+    ```
+    1) `1`
+    1) `{ a: 1 }`
+    1) `{ b: 2 }`
+    1) `undefined`
+1) Mit logol az alábbi snippet?
+    ```js
+    const { a: b } = { a: 1, b: 2 }
+    console.log(b)
+    ```
+    1) `1`
+    1) `2`
+1) Mit logol az alábbi snippet?
+    ```js
+    const { b: { c } } = { a: 1, b: { c: 2 } }
+    console.log(c)
+    ```
+    1) `1`
+    1) `2`
+    1) `{ c: 2 }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const { a, b: { c: d } } = { a: 1, b: { c: 2 } }
+    console.log(a, d)
+    ```
+    1) `1 2`
+    1) `2 2`
+    1) `1 { c: 2 }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const s = new Set([ 10 ])
+    s.add('alma')
+    s.add('körte')
+    s.add(10)
+    s.add('alma')
+    console.log(...s)
+    ```
+    1) `[ 10, 'alma', 'körte', 10 ]`
+    1) `[ 10, 'alma', 'körte', 10, 'alma' ]`
+    1) `[ 10, 'alma', 'körte', 'alma' ]`
+    1) `[ 10, 'alma', 'körte' ]`
+1) Mit logol az alábbi snippet?
+    ```js
+    const m = new Map()
+    m.set('k', 'v')
+    console.log(m.get('k'))
+    ```
+    1) `k`
+    1) `v`
+1) Mit logol az alábbi snippet?
+    ```js
+    const token = 'abc-xyz-123'
+    const m = new Map()
+    m.set(token, a => b => a + b)
+    console.log(m.get(token)(10)(20) === 30)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const token = 'abc-xyz-123'
+    const m = new Map()
+    m.set(token, a => b => a + b)
+    console.log(m.get(token)(10, 20) === 30)
+    ```
+    1) `true`
+    1) `false`
+1) Igaz-e a `Promise.resolve(10) === 10`
+    1) Igen
+    1) Nem
+1) Igaz-e a `Promise.resolve(10) == 10`
+    1) Igen
+    1) Nem
+1) Mit logol az alábbi snippet?
+    ```js
+    Promise.resolve(10)
+        .then(n => n + 1)
+        .then(n => console.log(n))
+    ```
+    1) `10`
+    1) `11`
+1) Mit logol az alábbi snippet?
+    ```js
+    Promise.resolve(10)
+        .then(n => Promise.resolve(n + 1))
+        .then(n => console.log(n))
+    ```
+    1) `10`
+    1) `11`
+    1) `NaN`
+1) Mit logol az alábbi snippet?
+    ```js
+    Promise.reject(new Error('hiba'))
+        .then(n => n + 1)
+        .then(n => console.log(n))
+    ```
+    1) `10`
+    1) `11`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    Promise.reject(new Error('hiba'))
+        .then(n => n + 1)
+        .catch(e => console.log(e.message))
+    ```
+    1) `10`
+    1) `11`
+    1) `hiba`
+    1) semmit
+1) Mit logol az alábbi snippet?
+    ```js
+    Promise.reject(new Error('hiba'))
+        .then(n => n + 1)
+        .catch(e => {})
+        .then(() => 10)
+        .then(n => console.log(n))
+    ```
+    1) `10`
+    1) `11`
+    1) `hiba`
+    1) semmit
