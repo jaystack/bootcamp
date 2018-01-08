@@ -115,6 +115,7 @@
     1) `cond1 === cond2`
     1) `a + b + 1000`
     1) `delete o.a`
+    1) `new Date()`
 1) Mi az értéke a `10 && 20` kifejezésnek?
     1) `20`
     1) `true`
@@ -786,3 +787,25 @@
     1) `10`
     1) `hiba`
     1) semmit
+1) Az alábbi kifejezések közül melyek mellékhatások?
+    1) `new Promise((resolve, reject) => resolve(10))`
+    1) `Promise.reject()`
+    1) `Promise.resolve()`
+    1) `fetch('/users')`
+    1) `db.find({ a: 1 })`
+    1) `fs.writeFile('hello.txt', 'hello')`
+    1) `fs.writeFileSync('hello.txt', 'hello')`
+    1) `new Error('hiba')`
+    1) `setTimeout(() => 1, 1000)`
+    1) `setInterval(() => 1)`
+    1) `Date.now()`
+    1) `new Date()`
+    1) `new Date('2018-01-01')`
+    1) `Math.random()`
+    1) `console.log('hello')`
+    1) `window.clientWidth`
+    1) `window.location`
+    1) `window.navigator`
+    1) `new window.Worker()`
+    1) `process.env`
+    1) `process.stdout`
