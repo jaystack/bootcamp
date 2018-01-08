@@ -146,4 +146,58 @@
 1) Igaz-e a `() => {} == () => {}` kifejezés?
     1) Igen
     1) Nem
-1) 
+1) Mit logol az alábbi snippet?
+    ```js
+    const o = {
+        f() { return this; }
+    }
+    console.log(o === o.f())
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const o1 = {
+        a: 10,
+        f() { return this.a; }
+    }
+    const o2 = {}
+    o2.f = o1.f
+    console.log(o2.f() === 10)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const o1 = {
+        a: 10,
+        f() { return this.a; }
+    }
+    const o2 = {}
+    o2.f = o1.f.bind(o1)
+    console.log(o2.f() === 10)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const o1 = {
+        a: 10,
+        f() { return this.a; }
+    }
+    const o2 = {}
+    o2.f = o1.f
+    console.log(o2.f.call(o1) === 10)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const o = {
+        a: 10,
+        f: () => { return this.a }
+    }
+    console.log(o.f())
+    ```
+    1) `10`
+    1) `undefined`
