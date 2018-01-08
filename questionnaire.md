@@ -69,6 +69,17 @@
     1) `{ a: 1, b: 2, c: 4 }`
 1) Mit logol az alábbi snippet?
     ```js
+    const o1 = { a: 1, b: { c: 2 } }
+    const o2 = { ...o1, a: 2 }
+    o1.b.c = 3
+    console.log(o2)
+    ```
+    1) `{ a: 1, b: { c: 2 } }`
+    1) `{ a: 2, b: { c: 2 } }`
+    1) `{ a: 1, b: { c: 3 } }`
+    1) `{ a: 2, b: { c: 3 } }`
+1) Mit logol az alábbi snippet?
+    ```js
     const a1 = [ 10, 20, 30 ]
     const a2 = [ 50, ...a1, 40, ...a1 ]
     a1[0] = 0
@@ -102,6 +113,7 @@
     1) `function f() {}`
     1) `cond1 === cond2`
     1) `a + b + 1000`
+    1) `delete o.a`
 1) Mi az értéke a `10 && 20` kifejezésnek?
     1) `20`
     1) `true`
@@ -201,3 +213,20 @@
     ```
     1) `10`
     1) `undefined`
+1) Mely állítások igazak a `.map(f)` függvényre?
+    1) Leképezi a tömböt egy másik tömbre az `f` függvény alapján.
+    1) Az `f` ugyanazzal a típussal kell visszatérjen, mint a tömb elemeinek a típusa.
+    1) Az újonnan előállt tömb hossza megegyezik a kiinduló tömbbel.
+    1) A `.map()` mutálja a tömböt, amin meghívjuk.
+1) Mely állítások igazak a `.filter(p)` függvényre?
+    1) Szűri a tömb elemeit az `p` függvény alapján.
+    1) Az `p` függvény egy predikátum.
+    1) Az újonnan előállt tömb hossza megegyezik a kiinduló tömb hosszával.
+    1) Az újonnan előállt tömb elemeinek a típusa megegyezik a kiinduló tömb elemeinek a típusával.
+    1) A `.filter()` mutálja a tömböt, amin meghívjuk.
+1) Mely állítások igazak a `.reduce(r[, i])` függvényre?
+    1) Ha nem adunk meg `i` paramétert, akkor az első akkumulált állapot a tömb első eleme lesz.
+    1) Az `r` függvény olyan típussal kell visszatérjen, mint ami az `i` típusa.
+    1) Az `r` függvény olyan típussal kell visszatérjen, mint a tömb elemeinek a típusa.
+    1) Az eredmény mindig egy tömb lesz.
+    1) Az `r` függvény egy reducer.
