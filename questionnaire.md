@@ -1062,6 +1062,39 @@
     1) `44`
     1) `84`
     1) `88`
+1) Mikor érdemes OOP osztályt definiálni?
+    1) Logikai egységbe tudunk vele rendezni függvényeket.
+    1) Állapottal rendelkező objektumot/objektumokat tudunk velük konstruálni, mely állapoton/állapotokon műveleteket tudunk végezni.
+    1) Típusokat definiálhatunk, amelyek között származási kapcsolatokat tudunk definiálni.
+1) Mi a különbség az *interface* és az *osztály* között?
+    1) Az interface egy típus, az osztály pedig egy típushoz kötött műveleteket definiál.
+    1) Az osztály egy típus, az interface pedig egy típushoz kötött műveleteket definiál.
+1) Mi a különbség az *expression* (kifejezés) és a *statement* között?
+    1) Az expression kiértékelhető, a statement elvégezhető.
+    1) Az expression elvégezhető, a statement kiértékelhető.
+1) Mi az a *pure function*?
+    1) Olyan függvény, amelyben csak szabad paraméterek vannak.
+    1) Olyan függvény, amelyben nincsenek szabad paraméterek.
+    1) Olyan függvény, amely ugyanazon inputra mindig ugyanazt az outputot produkálja.
+1) Mit nevezünk szabad paraméternek?
+    1) A függvény scope-jában definiált változó.
+    1) A függvény egy argumentuma, aminek nincs default értéke.
+    1) A függvényen belül egy olyan változó, ami a függvény scope-jában és argumentumai közt sincs definiálva.
+1) Mi a capturing?
+    1) Szabad paraméter felüldefiniálása.
+    1) Szabad paraméter megkötése.
+    1) Szabad paraméter elhagyása.
+1) Mit jelent a magasabb rendű függvény?
+    1) Egy osztálynak olyan tagfüggvénye, amely az osztály tulajdonságait képes megváltoztatni.
+    1) Olyan függvény, amely más függvények meghívásával határozza meg saját visszatérési értékét.
+    1) Olyan függvény, amely paraméterül kap egy másik függvényt és/vagy egy másik függvénnyel tér vissza
+1) Mi a closure?
+    1) Olyan kifejezés, amely szabad paramétereket köt meg.
+    1) Egy osztálynak olyan metódusa, amely private tag-ok értékét adja vissza.
+    1) Olyan változó, amelynek értékéhez nem lehet hozzáférni.
+1) Mi a currying lényege?
+    1) A többváltozós függvények leírhatóak egyváltozós függvények closure-jeként.
+    1) Függvények közvetlen meghívása helyett azokat átadjuk egy másik függvénynek, hogy az hívja meg őket.
 1) Az alábbi kifejezések közül melyek mellékhatások?
     1) `new Promise((resolve, reject) => resolve(10))`
     1) `Promise.reject()`
