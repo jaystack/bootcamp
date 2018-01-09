@@ -1087,7 +1087,7 @@
 1) Mit jelent a magasabb rendű függvény?
     1) Egy osztálynak olyan tagfüggvénye, amely az osztály tulajdonságait képes megváltoztatni.
     1) Olyan függvény, amely más függvények meghívásával határozza meg saját visszatérési értékét.
-    1) Olyan függvény, amely paraméterül kap egy másik függvényt és/vagy egy másik függvénnyel tér vissza
+    1) Olyan függvény, amely paraméterül kap egy másik függvényt és/vagy egy másik függvénnyel tér vissza.
 1) Mi a closure?
     1) Olyan kifejezés, amely szabad paramétereket köt meg.
     1) Egy osztálynak olyan metódusa, amely private tag-ok értékét adja vissza.
@@ -1095,6 +1095,15 @@
 1) Mi a currying lényege?
     1) A többváltozós függvények leírhatóak egyváltozós függvények closure-jeként.
     1) Függvények közvetlen meghívása helyett azokat átadjuk egy másik függvénynek, hogy az hívja meg őket.
+1) Az alábbiak közül melyek igazak tisztán funkcionális kódra?
+    1) Immutable
+    1) Gyors
+    1) Determinisztikus
+    1) Lazy
+1) Mit jelent az immutábilitás?
+    1) `var` és `let` helyett mindig `const`-ot használunk.
+    1) Nem írunk felül és nem törlünk semmit a memoriában. A nem használt allokációkat a Garbage Collector-ra bízzuk.
+    1) Csak a heap-en mutálunk, a stack-en soha.
 1) Az alábbi kifejezések közül melyek mellékhatások?
     1) `new Promise((resolve, reject) => resolve(10))`
     1) `Promise.reject()`
