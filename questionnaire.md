@@ -1103,7 +1103,7 @@
 1) Mit jelent az immutábilitás?
     1) `var` és `let` helyett mindig `const`-ot használunk.
     1) Nem írunk felül és nem törlünk semmit a memoriában. A nem használt allokációkat a Garbage Collector-ra bízzuk.
-    1) Csak a heap-en mutálunk, a stack-en soha.
+    1) Csak a heap-en módosítunk adatot, a stack-en soha.
 1) Az alábbi kifejezések közül melyek mellékhatások?
     1) `new Promise((resolve, reject) => resolve(10))`
     1) `Promise.reject()`
