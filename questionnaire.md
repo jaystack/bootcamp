@@ -1015,6 +1015,53 @@
     1) `10`
     1) `30`
     1) `40`
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        static f() {
+            return 10
+        }
+
+        constructor(p) {
+            this.a = p
+        }
+
+        f() {
+            return 20
+        }
+    }
+
+    class B extends A {
+        static f() {
+            return super.f() + 1
+        }
+
+        constructor(p1, p2) {
+            super(4)
+            console.log(
+                p1 +
+                p2 +
+                super.constructor.f() +
+                this.constructor.f() +
+                super.f() +
+                this.f() +
+                this.a
+            )
+        }
+
+        f() {
+            return super.f() + 2
+        }
+    }
+
+    new B(A.f(), B.f())
+    ```
+    1) `10`
+    1) `20`
+    1) `22`
+    1) `44`
+    1) `84`
+    1) `88`
 1) Az alábbi kifejezések közül melyek mellékhatások?
     1) `new Promise((resolve, reject) => resolve(10))`
     1) `Promise.reject()`
