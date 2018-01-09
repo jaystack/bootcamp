@@ -783,6 +783,90 @@
     1) `10`
     1) `hiba`
     1) semmit
+1) Mivel tér vissza egy `async` függvény?
+    1) Önmagával
+    1) Promise-szal
+    1) A visszatérési értékével
+1) Mit old fel az `await`?
+    1) Promise-t
+    1) Mindent triviálisan felold, de ha Promise-t kap, akkor megvárja annak a resolve-ját
+    1) HTTP request-eket
+1) Mivel tér vissza egy generátor?
+    1) Iterátorral
+    1) Az első kilépési pontjának értékével
+    1) A visszatéréi értékével
+1) Mit logol az alábbi snippet?
+    ```js
+    const g = function*() {
+        yield 10
+        return 20
+    }
+    console.log(g())
+    ```
+    1) `10`
+    1) `20`
+    1) `{ value: 10, done: false }`
+    1) `{ value: 20, done: true }`
+    1) Egy generátort
+1) Mit logol az alábbi snippet?
+    ```js
+    const g = function*() {
+        yield 10
+        return 20
+    }
+    const i = g()
+    i.next()
+    console.log(i.next())
+    ```
+    1) `10`
+    1) `20`
+    1) `{ value: 10, done: false }`
+    1) `{ value: 20, done: true }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const g = function*(p) {
+        const a = yield p
+        return a + 20
+    }
+    const i = g(10)
+    i.next()
+    console.log(i.next(20))
+    ```
+    1) `{ value: 10, done: false }`
+    1) `{ value: 20, done: true }`
+    1) `{ value: 30, done: true }`
+    1) `{ value: 40, done: true }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const g = function*(p) {
+        const a = yield p
+        return a + 20
+    }
+    const i = g(10)
+    console.log(i.next(i.next().value))
+    ```
+    1) `{ value: 10, done: false }`
+    1) `{ value: 20, done: true }`
+    1) `{ value: 30, done: true }`
+    1) `{ value: 40, done: true }`
+1) Mit logol az alábbi snippet?
+    ```js
+    const g = function*(p) {
+        try {
+            const a = yield p
+            console.log(a)
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+	const i = g(10)
+    i.next()
+	i.throw(new Error('hello'))
+    ```
+    1) `10`
+    1) `{ value: 10, done: false }`
+    1) `{ value: 10, done: true }`
+    1) `hello`
 1) Mit nevezünk egy függvény a kontextusának (context)?
     1) A blokk, ami a függvényt tartalmazza
     1) Az objektum, ami függvényt tartalmazza
