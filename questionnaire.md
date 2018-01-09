@@ -1234,7 +1234,7 @@
 1) Mi az a *pure function*?
     1) Olyan függvény, amelyben csak szabad paraméterek vannak.
     1) Olyan függvény, amelyben nincsenek szabad paraméterek.
-    1) Olyan függvény, amely ugyanazon inputra mindig ugyanazt az outputot produkálja.
+    1) Olyan determinisztikus függvény, amely ugyanazon inputra mindig ugyanazt az outputot produkálja.
 1) Mit nevezünk szabad paraméternek?
     1) A függvény scope-jában definiált változó.
     1) A függvény egy argumentuma, aminek nincs default értéke.
@@ -1243,14 +1243,54 @@
     1) Szabad paraméter felüldefiniálása.
     1) Szabad paraméter megkötése.
     1) Szabad paraméter elhagyása.
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = a => b => a + b
+    console.log(f(10, 20))
+    ```
+    1) `10`
+    1) `20`
+    1) `30`
+    1) Egy függvényt
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = (a, b) => a + b
+    console.log(f.bind(null, 10))
+    ```
+    1) `10`
+    1) `20`
+    1) `30`
+    1) Egy függvényt
 1) Mit jelent a magasabb rendű függvény?
     1) Egy osztálynak olyan tagfüggvénye, amely az osztály tulajdonságait képes megváltoztatni.
     1) Olyan függvény, amely más függvények meghívásával határozza meg saját visszatérési értékét.
     1) Olyan függvény, amely paraméterül kap egy másik függvényt és/vagy egy másik függvénnyel tér vissza.
+1) Mit logol az alábbi snippet?
+    ```js
+    const f = h => p => h(p)
+    const g = p => p + 1
+    console.log(f(g)(10))
+    ```
+    1) `10`
+    1) `11`
+    1) Egy függvényt
 1) Mi a closure?
     1) Olyan kifejezés, amelyben a szabad paraméterek rejtettek a külvilág számára.
     1) Egy osztálynak olyan metódusa, amely private tag-ok értékét adja vissza.
     1) Olyan változó, amelynek értékéhez nem lehet hozzáférni.
+1) Mit logol az alábbi snippet?
+    ```js
+    const createIdGenerator = () => {
+        let id = 0
+        return () => ++i
+    }
+    const getId = createIdGenerator()
+    getId()
+    console.log(getId())
+    ```
+    1) `0`
+    1) `1`
+    1) `2`
 1) Mi a currying lényege?
     1) A többváltozós függvények leírhatóak egyváltozós függvények closure-jeként.
     1) Függvények közvetlen meghívása helyett azokat átadjuk egy másik függvénynek, hogy az hívja meg őket.
@@ -1258,13 +1298,27 @@
     1) `var` és `let` helyett mindig `const`-ot használunk.
     1) Nem írunk felül és nem törlünk semmit a memoriában. A nem használt allokációkat a Garbage Collector-ra bízzuk.
     1) Csak a heap-en módosítunk adatot, a stack-en soha.
-1) Az alábbiak közül melyek igazak NEM tisztán funkcionális kódra?
+1) Melyik nem igaz a NEM tisztán funkcionális kódra?
     1) Immutable
     1) Lazy
-    1) Gyors
     1) Determinisztikus
     1) Könnyen párhuzamosítható
     1) Könnyen tesztelhető
+1) Melyik állítás igaz a mellékhatásokra?
+    1) Indeterminisztikus
+    1) Determinisztikus
+    1) Csak aszinkron lehet
+1) Az alábbiak közül melyek mellékhatások?
+    1) Fájlművelet
+    1) Hálózati kommunikáció
+    1) Promise
+    1) Idő
+    1) Exception
+    1) Standard output
+    1) Véletlen
+    1) Hardware megszakítás
+    1) Closure
+    1) Környezeti változó
 1) Az alábbi kifejezések közül melyek mellékhatások?
     1) `new Promise((resolve, reject) => resolve(10))`
     1) `Promise.reject()`
