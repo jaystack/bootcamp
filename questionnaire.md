@@ -753,8 +753,6 @@
     1) semmit
 1) Mit logol az alábbi snippet?
     ```js
-    const f = async () => { throw new Error('hiba') }
-
     const g = async () => {
         try {
             await Promise.reject(new Error('hiba'))
@@ -771,8 +769,6 @@
     1) semmit
 1) Mit logol az alábbi snippet?
     ```js
-    const f = async () => { throw new Error('hiba') }
-
     const g = async () => {
         try {
             await new Promise((resolve, reject) => reject(new Error('hiba')))
@@ -787,6 +783,238 @@
     1) `10`
     1) `hiba`
     1) semmit
+1) Mit nevezünk egy függvény a kontextusának (context)?
+    1) A blokk, ami a függvényt tartalmazza
+    1) Az objektum, ami függvényt tartalmazza
+    1) A függvény argumentumainak összessége
+1) Mi a scope?
+    1) Egy olyan láthatósági tartomány, amiben a változók elérhetőségét értelmezzük
+    1) Egy objektum, amire a `this` mutat
+    1) Egy osztály, amire a `this` mutat
+1) Mire mutat a `this`?
+    1) A függvény kontextusára
+    1) A függvény scopejára
+    1) Egy metódus osztályára
+1) Mit osztályoz az OOP osztály?
+    1) Az objektumokat
+    1) A metódusokat
+    1) A névtereket
+1) Milyen osztálynak nevezzük azt, amit kizárólag csak egyszer példányosítunk
+    1) abstract
+    1) static
+    1) singleton
+    1) private
+1) Milyen osztálynak nevezzük azt, amit nem lehet példányosítani?
+    1) abstract
+    1) static
+    1) singleton
+    1) private
+1) Hogy nevezzük azt az osztályt, amiből egy osztály származik?
+    1) Gyermek
+    1) Ős
+    1) Példány
+1) Hogy nevezzük azt az osztály, ami egy osztályból származik?
+    1) Gyermek
+    1) Ős
+    1) Példány
+1) Mi a prototípus?
+    1) Egy olyan osztály, amiből származtatunk
+    1) Egy olyan objektum, amit példányosításkor reassignolunk
+1) Mi a konstruktor?
+    1) Egy függvény, ami példányosításkor fut le
+    1) Egy függvény, ami örökléskor fut le
+1) Mit nevezünk static függénynek/metódusnak?
+    1) Az osztálynak egy olyan függvénye, amit csak az osztály láthat
+    1) Az osztálynak egy olyan függvénye, ami nem példányhoz kötött
+    1) Az osztálynak egy olyan függvénye, ami még nincs implementálva
+1) Mit nevezünk abstract függvénynek/metódusnak?
+    1) Az osztálynak egy olyan függvénye, amit csak az osztály láthat
+    1) Az osztálynak egy olyan függvénye, ami nem példányhoz kötött
+    1) Az osztálynak egy olyan függvénye, ami még nincs implementálva
+1) Mit nevezünk metódus override-nak?
+    1) Az őshöz képest egy osztály metódusainak felüldefiniálását.
+    1) Az gyermek osztály metódusainak első definiálását.
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        static a = 10
+        a = 20
+
+        static f() {
+            console.log(this.a)
+        }
+
+        f() {
+            console.log(this.a)
+        }
+    }
+
+    A.f()
+    ```
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        static a = 10
+        a = 20
+
+        static f() {
+            console.log(this.a)
+        }
+
+        f() {
+            console.log(this.a)
+        }
+    }
+
+    new A().f()
+    ```
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        constructor() {
+            console.log('hello')
+            this.f()
+        }
+
+        f() {
+            console.log('hali')
+        }
+    }
+
+    new A().f()
+    ```
+    1) `hello`
+    1) `hali`
+    1) `hello` és `hali`
+    1) `hello` és `hali` és `hali`
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        static a = 10
+        static f() {
+            console.log(this.a)
+        }
+
+        a = 20
+
+        constructor() {
+            this.constructor.f()
+        }
+
+        f() {
+            console.log(this.a)
+        }
+    }
+
+    new A()
+    ```
+    1) `10`
+    1) `20`
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        static a = 10
+        static f() {
+            console.log(this.a)
+        }
+
+        a = 20
+
+        constructor() {
+            this.f()
+        }
+
+        f() {
+            console.log(this.a)
+        }
+    }
+
+    new A()
+    ```
+    1) `10`
+    1) `20`
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        f() {
+            console.log('hello')
+        }
+    }
+
+    class B extends A {
+        f() {
+            console.log('hali')
+        }
+    }
+
+    new B().f()
+    ```
+    1) `hello`
+    1) `hali`
+    1) `hello` és `hali`
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        f() {
+            console.log('hello')
+        }
+    }
+
+    class B extends A {
+        f() {
+            super.f()
+            console.log('hali')
+        }
+    }
+
+    new B().f()
+    ```
+    1) `hello`
+    1) `hali`
+    1) `hello` és `hali`
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        a = 10
+
+        f(p) {
+            this.a = this.a + p
+        }
+    }
+
+    class B extends A {
+        f(p) {
+            super.f(p)
+            this.a = this.a + p
+            console.log(this.a)
+        }
+    }
+
+    new B().f(20)
+    ```
+    1) `30`
+    1) `40`
+    1) `50`
+1) Mit logol az alábbi snippet?
+    ```js
+    class A {
+        constructor(p) {
+            this.a = p
+        }
+    }
+
+    class B extends A {
+        constructor(p) {
+            super(p + 10)
+            console.log(this.a)
+        }
+    }
+
+    new B(30)
+    ```
+    1) `10`
+    1) `30`
+    1) `40`
 1) Az alábbi kifejezések közül melyek mellékhatások?
     1) `new Promise((resolve, reject) => resolve(10))`
     1) `Promise.reject()`
