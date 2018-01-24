@@ -1,7 +1,7 @@
 1) Melyik állítás igaz?
     1) A Javascript-et jellemzően gépi kódra fordítjuk és binárisokat állítunk elő belőle.
     1) A Javascript egy interpreter által futtatott nyelv, amelynek az értelmezése runtime történik.
-1) Az alábbi típusok közül melyek primitívek?
+1) Az alábbi típusok közül melyek primitívek (melyek adódnak át érték szerint)?
     1) `Object`
     1) `String`
     1) `Boolean`
@@ -226,13 +226,7 @@
 1) Igaz-e a `[ 'alma' ] === [ 'alma' ]` kifejezés?
     1) Igen
     1) Nem
-1) Igaz-e a `[] == []` kifejezés?
-    1) Igen
-    1) Nem
 1) Igaz-e a `x => x + 1 === x => x + 1` kifejezés?
-    1) Igen
-    1) Nem
-1) Igaz-e a `() => {} == () => {}` kifejezés?
     1) Igen
     1) Nem
 1) Mit logol az alábbi snippet?
@@ -253,6 +247,17 @@
     const o2 = {}
     o2.f = o1.f
     console.log(o2.f() === 10)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const o = {
+        a: 10,
+        f() { return this.a; }
+    }
+    const f = o.f
+    console.log(f() === 10)
     ```
     1) `true`
     1) `false`
@@ -284,12 +289,34 @@
     ```js
     const o = {
         a: 10,
+        f() { return this.a; }
+    }
+    const f = o.f.bind(o)
+    console.log(f() === 10)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const o = {
+        a: 10,
+        f() { return this.a; }
+    }
+    const f = o.f
+    console.log(f.call(o) === 10)
+    ```
+    1) `true`
+    1) `false`
+1) Mit logol az alábbi snippet?
+    ```js
+    const o = {
+        a: 10,
         f: () => { return this.a }
     }
-    console.log(o.f())
+    console.log(o.f() === 10)
     ```
-    1) `10`
-    1) `undefined`
+    1) `true`
+    1) `false`
 1) Mely állítások igazak a `.map(f)` függvényre?
     1) Leképezi a tömböt egy másik tömbre az `f` függvény alapján.
     1) Az `f` ugyanazzal a típussal kell visszatérjen, mint a tömb elemeinek a típusa.
@@ -304,8 +331,8 @@
 1) Mely állítások igazak a `.reduce(r[, i])` függvényre?
     1) Az `r` függvény egy reducer.
     1) Ha nem adunk meg `i` paramétert, akkor az első akkumulált állapot a tömb első eleme lesz.
-    1) Az `r` függvény olyan típussal kell visszatérjen, mint ami az `i` típusa.
-    1) Az `r` függvény olyan típussal kell visszatérjen, mint a tömb elemeinek a típusa.
+    1) Az `r` függvény olyan típussal kell (célszerű) visszatérjen, mint ami az `i` típusa.
+    1) Az `r` függvény olyan típussal kell (célszerű) visszatérjen, mint a tömb elemeinek a típusa.
     1) Az eredmény mindig egy tömb lesz.
 1) Mit logol az alábbi snippet?
     ```js
@@ -381,11 +408,11 @@
     1) `{ name: 'pista' }`
     1) `{ pista: 'pista' }`
     1) Hibát dob
-1) Melyik esetben lesz a `this` undefined?
-    1) `{ f() { console.log(this) } }`
-    1) `{ f: function() { console.log(this) } }`
-    1) `{ ['f']: function() { console.log(this) } }`
-    1) `{ f: () => { console.log(this) } }`
+1) Melyik függvény logol `false`-t?
+    1) `const o = { f() { console.log(o === this) } }`
+    1) `const o = { f: function() { console.log(o === this) } }`
+    1) `const o = { ['f']: function() { console.log(o === this) } }`
+    1) `const o = { f: () => { console.log(o === this) } }`
 1) Mit logol az alábbi snippet?
     ```js
     const name = 'pista'
@@ -869,7 +896,7 @@
 1) Mivel tér vissza egy generátor?
     1) Iterátorral
     1) Az első kilépési pontjának értékével
-    1) A visszatéréi értékével
+    1) A visszatérési értékével
 1) Mit logol az alábbi snippet?
     ```js
     const g = function*() {
@@ -958,7 +985,7 @@
     1) Az objektumokat
     1) A metódusokat
     1) A névtereket
-1) Milyen osztálynak nevezzük azt, amit kizárólag csak egyszer példányosítunk
+1) Milyen osztálynak nevezzük azt, amit kizárólag csak egyszer példányosítunk?
     1) abstract
     1) static
     1) singleton
