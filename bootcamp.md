@@ -22,6 +22,12 @@ Javascript is a single threaded asynchronous script langugage runned by interpre
 
 **Check your javascript skills by our [questionaire](https://community.risingstack.com/repatch-the-simplified-redux/)!**
 
+### The ECMAScript standards
+
+In accordance with the popularity of Javascript, this is a dynamically evolving language. The ECMAScript is the Javascript standard by the ECMA international. The association publishes an extension of the language in every year. You can always check the [kangax compatibility table](http://kangax.github.io/compat-table/es2016plus/) to ensuring which features are supported in your choosed platform.
+
+
+
 ## Functional programming
 
 This topic is too wide to explain in a brief paragraph. As I mentioned above javascript is a very functional-powered language. Although this is not a [pure functional language](https://en.wikipedia.org/wiki/Purely_functional_programming), it has a lot of features that allow us to follow functional patterns. There are many articles and blog posts about functional patterns in javascript, I can also suggest one.
@@ -179,6 +185,71 @@ const [first, second, ...rest] = [10, 20, 30, 40]
 ```
 
 #### Other useful array methods
+
+##### `.map()`
+
+Maybe the most often used array method, that projects an array to an other array. The `.map()` returns a new array with the same length. With using `.map()`, you can change type of the elements, but it keeps the length.
+
+```js
+const usernames = users.map(user => user.name)
+```
+
+##### `.filter()`
+
+An other often used array method. The `.filter` keeps the type of the elements, but it does not with the length. This method also returns a new array.
+
+```js
+const permittedUsers = users.filter(user => user.role === 'SOME_ROLE')
+```
+
+##### `.find()`
+
+The `.find()` allows you to find an element in arrays with a predicate function:
+
+```js
+const user = users.find(user => user.id === 'abc')
+```
+
+##### `.findIndex()`
+
+The `.findIndex()` is very similar to `.find()`, but rather than it, the `.findIndex()` returns the index of the matched element.
+
+```js
+const userIndex = users.findIndex(user => user.id === 'abc')
+```
+
+##### `.includes()`
+
+A very good alternative of `.indexOf()`, but it returns with boolean value, so you do not need to check `index > -1` typically. Against of `.find()` or `.findIndex()` it searches by exact value matching, so is often useful for checking primitives in arrays.
+
+```js
+['SOME_PERMISSION', 'AN_OTHER_PERMISSION'].includes('SOME_PERMISSION') // true
+```
+
+##### `.flatten()`
+
+This method converts multi-dimensional arrays to one-dimensional arrays.
+
+```js
+const letters = ['a', 'b', 'c']
+const numbers = [1, 2, 3]
+const matrix = letters.map(letter => numbers.map(number => ({ letter, number })))
+const pairs = matrix.flatten()
+
+/*
+[
+  { letter: 'a', number: 1 },
+  { letter: 'a', number: 2 },
+  { letter: 'a', number: 3 },
+  { letter: 'b', number: 1 },
+  { letter: 'b', number: 2 },
+  { letter: 'b', number: 3 },
+  { letter: 'c', number: 1 },
+  { letter: 'c', number: 2 },
+  { letter: 'c', number: 3 }
+]
+*/
+```
 
 ##### `.some()`
 
