@@ -13,6 +13,9 @@ A cél a gyakorlatot szerezni a fullstack js fejlesztésben egy példa appon ker
   - Closures: counter példa
   - Side-effect-ek kezelése. Ehhez blogpost
 - React mint funkcionális library
+  - koncepció
+  - virtual dom és bootstrapping
+  - immutable fontossága
 - "Offline react" app
   - állapot tervezés, szerializálható, nem-redundáns állapotok, minimális entrópia
   - repatch basics

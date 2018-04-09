@@ -417,3 +417,29 @@ A functional code is always deterministic, but in the real world there are indet
 Indeterministic resources are not able to unit-testing. To writing smart code you have to separate them from the strictly functional parts logic.
 
 **Check this [post](https://github.com/jaystack/blog-posts/blob/master/side-effect/index.md) to getting around this topic.**
+
+## React as a functional library
+
+I do not have to introduce React, because you might know it. But maybe I can tell some interesting fact about the library generally. React is a universal paradigm to creating view functionally. The basic principle is simple: **Convert the data to view!** Or a bit differently: **Convert props to virtual dom.** Of course, React is more sophisticated, but the basic principle is this. So, every React component is just a pure function, that accepts the data as arguments (`props`) and returns the virtual dom. The virtual dom is a serialisable descriptor of the view.
+
+### JSX
+
+What happens exactly when you write [JSX](https://reactjs.org/docs/introducing-jsx.html) code:
+
+```jsx
+const element = <div className="hello"><h1>Hello, World!</h1></div>
+```
+
+JSX transpilers compile this code into:
+
+```js
+const element = React.createElement('div', {
+  className: 'hello',
+  children: React.createElement('h1', {
+    children: 'Hello, World!'
+  })
+})
+```
+
+### The virtual dom
+
