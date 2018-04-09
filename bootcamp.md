@@ -380,3 +380,40 @@ users.map(({id, name}) => (
 ```
 
 ### Closures
+
+To understand closures first you need to understand what means capturing and bindid variables. If I have an expression, something like this:
+
+```js
+const f = a => b => a + b
+```
+
+then the `b => a + b` expression is an open expression, because `a` does not appears in this expression. The `b` is a *bound variable* and `a` is a *free variable* here. But if you give some value to `a` by `f(10)`, then the `a` will a captured variable in the inner expression.
+
+The inner scope definitely access its value, but you can not from outside. This is the *closure*, when a set of variables are hidden, and there is no way to modify them directly. Let's see a simple example:
+
+```js
+const createIncrementalIdGenerator = () => {
+  let id = 0
+  return () => ++id
+}
+
+const getId = createIncrementalIdGenerator()
+console.log(getId) // 1
+console.log(getId) // 2
+```
+
+In this example you can not decrease its value, just increase.
+
+Closures makes safety to protect variables (states) from the incompetent use. Redux's store is a closure and you can not access the store's state without the `getState()` function. But you never can modify by overriding its value, like `store.state = ...`
+
+### Side-effects
+
+A functional code is always deterministic, but in the real world there are indeterministic stuffs such as:
+- network interaction
+- filesystem interaction
+- working with the current time
+- randomness
+
+Indeterministic resources are not able to unit-testing. To writing smart code you have to separate them from the strictly functional parts logic.
+
+**Check this [post](https://github.com/jaystack/blog-posts/blob/master/side-effect/index.md) to getting around this topic.**
