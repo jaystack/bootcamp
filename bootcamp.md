@@ -26,7 +26,9 @@ Javascript is a single threaded asynchronous script langugage runned by interpre
 
 In accordance with the popularity of Javascript, this is a dynamically evolving language. The ECMAScript is the Javascript standard by the ECMA international. The association publishes an extension of the language in every year. You can always check the [kangax compatibility table](http://kangax.github.io/compat-table/es2016plus/) to ensuring which features are supported in your choosed platform.
 
+### Babel
 
+Javascript feature-supporting is very diverse, but convergent caused of the ECMAScript standard. Usually you need to compile Javascript to Javascript in a lower version. This makes a babelian chaos, and it is not easy to wrap your mind around. There is some tool to make this transpilations, such as [Babel](http://babeljs.io/) or the ultimate [TypeScript](https://www.typescriptlang.org/). This latter is a typed superset of Javascript and it also includes the newest features of ECMAScript.
 
 ## Functional programming
 
