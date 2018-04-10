@@ -441,5 +441,66 @@ const element = React.createElement('div', {
 })
 ```
 
-### The virtual dom
+### The virtual dom and bootstrapping
 
+### Functional components
+
+### Importance of immutable data-handling
+
+### How Redux works
+
+### How Repatch works
+
+### The state
+
+## Creating an offline react app
+
+### Testing repatch actions
+
+## Running Docker containers
+
+## Creating a NodeJS app
+
+### Express basics
+
+#### Handlers
+
+#### Middlewares
+
+### Configs
+
+### Graceful startup
+
+### A basic authentication and authorization
+
+### Platfrom-independent services and side-effect handling
+
+### Unit-testing services
+
+#### Mocks and spies
+
+## Creating an online react app
+
+### react-router
+
+### Creating a simple api interface
+
+### Thunks and side-effect handling
+
+### Typing-timer
+
+### Strong- and weak binding
+
+### Unit-testing thunks
+
+## Creating Docker images
+
+## Docker-composing
+
+## AWS
+
+### Deploy containers to ECS
+
+### Continous integration
+
+### Serverless environments and lambdas
