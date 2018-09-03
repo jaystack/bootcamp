@@ -443,9 +443,68 @@ const element = React.createElement('div', {
 
 ### The virtual dom and bootstrapping
 
+The `React.createElement` always returns virtual dom. Virtual dom is a simple serializable object hierarchy, that describes the entire view. And React finishes here its work. Rendering to DOM must applied by [react-dom](https://www.npmjs.com/package/react-dom). ReactDOM is a render engine for rendering to DOM. There are several render engines, for example to PDF, Canvas, native mobile view, LED display or something else.
+
+So the virtual dom is an environment independent input of the rendering engines. The React library performs only this part of the entire react flow, and the core functions of this moment is the `React.createElement`, which renders the virtual dom actually.
+
+If any state of any component changes, React will rerender the component, and also the child components and their child components below that, etc.
+
+The render engine (eg. react-dom) listens the changes in the virtual dom. That means when the virtual dom changes, the render engine determines which part of the dom changed actually by difference of the previous and the current virtual dom. If you type some text in an input field, the virtual dom only changes at this point, so the render engine only updates only this input value in the html dom.
+
 ### Functional components
 
+The simples way to implement a react component is writing a function, which takes the props as argument and returns the virtual dom.
+
+Something like:
+
+```jsx
+const Title = ({ name }) => <div>Hello {name}!</div>
+```
+
+The first argument is the `props`, the same as `this.props` in the class-based components. It also has a second argument: `context`, but this is an advanced feature and usually we don't need it to use.
+
+We call them functional components, because they written as simple pure functions. Functional components' common property is that they don't have any inner state. If we need some state in the components, we must define them as classes.
+
 ### Importance of immutable data-handling
+
+The virtual dom is an immutable data structure as the `React.createElement` is a pure immutable function. So if you have not thought so far, rendering is a computationally job.
+
+Therefore in a well-written react application we try to avoid unnecessary rerenders. The pricinple is simple: needed to know in every component when the input data - props (and state) - really changes.
+
+Suppose that we have a simple state in a component:
+
+```jsx
+class NameInput extends React.Component {
+  state = {
+    name: 'World'
+  }
+
+  handleChange = evt => {
+    // ...
+  }
+
+  render() {
+    return <input
+      value={this.state.name}
+      onChange={this.handleChange}
+    />
+  }
+}
+```
+
+What if we update the state by mutating the state:
+
+```js
+handleChange = evt => {
+  this.state.name = evt.target.value
+}
+```
+
+The state instance wasn't change, we didn't create a new one. We just override the old value. React tries to determines the difference of the previous and current state. But the previous state is lost, because we modified that directly. Then the difference between the previous and the current state is nothing. React won't render.
+
+So if you update the state always immutable, react has always the previous and the current state at all times, because in this case we created a new instance of the state object. Then react can observe the difference and rerender the component.
+
+Mutability also can cause unnecessary rerenders. Always take care to handle the data immutable!
 
 ### How Redux works
 
@@ -504,3 +563,9 @@ const element = React.createElement('div', {
 ### Continous integration
 
 ### Serverless environments and lambdas
+
+## Isomorph React applications
+
+### Next.js
+
+Check the [tutorial](https://learnnextjs.com/) of [Next.js](https://github.com/zeit/next.js/).
