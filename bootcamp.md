@@ -508,6 +508,38 @@ Mutability also can cause unnecessary rerenders. Always take care to handle the 
 
 ### How Redux works
 
+For understanding how redux works, let's implement a simple redux store!
+
+```js
+const createStore = reducer => {
+  let state
+  let listeners = []
+
+  subscribe = listener => {
+    listeners = [ ...listeners, listener ]
+    const unsubscribe = () => listeners = listeners.filter(
+      l => l !== listeners
+    )
+    return unsubscribe
+  }
+
+  dispatch = action => {
+    state = reducer(state, action)
+    listeners.forEach(listener => listener())
+  }
+
+  getState = () => state
+
+  return {
+    subscribe
+    dispatch
+    getState
+  }
+}
+```
+
+Notice that the real redux implementation is a bit smarter. But the essential part is almost the same.
+
 ### How Repatch works
 
 ### The state
