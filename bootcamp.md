@@ -506,6 +506,10 @@ So if you update the state always immutable, react has always the previous and t
 
 Mutability also can cause unnecessary rerenders. Always take care to handle the data immutable!
 
+#### The `PureComponent`
+
+We know functional components, `React.Component` and now we meet `React.PureComponent`. `PureComponent` is almost the same like the regulas `Component` baseclass, except that `PureComponent` has a builtin shallow check for the changing `props` and `state`. It's really useful and advisable to use, so **check this [documentation](https://reactjs.org/docs/react-api.html#reactpurecomponent) to understand it**.
+
 ### How Redux works
 
 #### Creating the store
@@ -548,7 +552,7 @@ Okay. Now we need a reducer.
 
 ```js
 const reducer = (state = '', action) =>
-  action === 'UPDATE_TEXT' ? action.text : state
+  action === 'UPDATE_NAME' ? action.name : state
 ```
 
 Of course usually you write a bit more complicated reducers with `switch-case` statement. It's practical if you react on multiple actions.
@@ -560,16 +564,16 @@ What if we'd like to combinate multiple reducers into one root reducer? Suppose 
 ```js
 {
   inProgress: Boolean,
-  text: String
+  name: String
 }
 ```
 
-We'd like to separate them into two reducers. One for `inProgress` and one for `text`. Then we have an `inProgress` reducer and a `textReducer`. Redux provides a `combineReducers` function, you probably know it already.
+We'd like to separate them into two reducers. One for `inProgress` and one for `name`. Then we have an `inProgress` reducer and a `nameReducer`. Redux provides a `combineReducers` function, you probably know it already.
 
 ```js
 const rootReducer = combineReducers({
   inProgress: inProgressReducer,
-  text: textReducer
+  name: nameReducer
 })
 ```
 
@@ -578,13 +582,50 @@ How it works? There is no magic. You can imagine like that:
 ```js
 const rootReducer = (state, action) => ({
   inProgress: inProgressReducer(state.inProgress, action),
-  text: textReducer(state.textReducer, action)
+  name: nameReducer(state.name, action)
 })
 ```
 
 The slices of the state and the related reducers take the proper substate, what they need, and the action as arguments. Of course they get every action, but they will react on those action, in which they are interested. If they get disinterested actions, they return the same (previous) state. So just those reducers will work, which should react on the action.
 
 #### Connecting components to the state
+
+The simplest way to connect the application to the store's state is subscribe the entire application to the store, and pass the whole state there:
+
+```jsx
+store.subscribe(() => ReactDOM.render(<App state={store.getState()}/>))
+```
+
+But it's not too efficient. The entire application need to rerender on every state change. Of course you can avoid unnecessary rerenders in the components with `shouldComponentUpdate` lifecycle method, but it's still really inefficient.
+
+The best way to connect the state to the components is that every component - which needs some state - will be connected to the store separately.
+
+```js
+import { connect } from 'redux'
+
+connect(state => ({ name: state.name }), { updateName })(NameInput)
+```
+
+Notice, that the `connect` function's signature is a decorator-like signature:
+
+```
+(mapStateToProps, mapDispatchToProps) => component => container
+```
+
+So the reason behind the curry is this consideration, that we can use them as decorators.
+
+```js
+@connect(state => ({ name: state.name }), { updateName })
+class NameInput extends React.Component {
+  ...
+}
+```
+
+How it works? The `connect` function wraps your component into an outer component and returns this container. The container wraps your actions with the `dispatch` function and pass them to your component as props. It subscribes to the store change and persists the return value of the `mapStateToProps` into its local state, which is forwarded to your component as props.
+
+#### StoreProvider
+
+### Selectors
 
 ### How Repatch works
 
