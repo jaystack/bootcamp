@@ -508,6 +508,8 @@ Mutability also can cause unnecessary rerenders. Always take care to handle the 
 
 ### How Redux works
 
+#### Creating the store
+
 For understanding how redux works, let's implement a simple redux store!
 
 ```js
@@ -538,7 +540,51 @@ const createStore = reducer => {
 }
 ```
 
-Notice that the real redux implementation is a bit smarter. But the essential part is almost the same.
+Notice that the real redux implementation is a bit smarter. But the essential part is almost the same. After creating the store, redux dispatches a special init action, which ensures taking the initial state. How it works? It's simple. Your reducers won't react on a `@@redux/INIT` action, therefore they return the previous state. Because there is no previous state, the reducer automatically takes the default argument.
+
+#### Reducers
+
+Okay. Now we need a reducer.
+
+```js
+const reducer = (state = '', action) =>
+  action === 'UPDATE_TEXT' ? action.text : state
+```
+
+Of course usually you write a bit more complicated reducers with `switch-case` statement. It's practical if you react on multiple actions.
+
+#### Combining reducers
+
+What if we'd like to combinate multiple reducers into one root reducer? Suppose that we have the following state:
+
+```js
+{
+  inProgress: Boolean,
+  text: String
+}
+```
+
+We'd like to separate them into two reducers. One for `inProgress` and one for `text`. Then we have an `inProgress` reducer and a `textReducer`. Redux provides a `combineReducers` function, you probably know it already.
+
+```js
+const rootReducer = combineReducers({
+  inProgress: inProgressReducer,
+  text: textReducer
+})
+```
+
+How it works? There is no magic. You can imagine like that:
+
+```js
+const rootReducer = (state, action) => ({
+  inProgress: inProgressReducer(state.inProgress, action),
+  text: textReducer(state.textReducer, action)
+})
+```
+
+The slices of the state and the related reducers take the proper substate, what they need, and the action as arguments. Of course they get every action, but they will react on those action, in which they are interested. If they get disinterested actions, they return the same (previous) state. So just those reducers will work, which should react on the action.
+
+#### Connecting components to the state
 
 ### How Repatch works
 
