@@ -625,11 +625,23 @@ How it works? The `connect` function wraps your component into an outer componen
 
 #### StoreProvider
 
+These containers takes the store instance from the [context](https://reactjs.org/docs/context.html) provided by the `react-redux`'s [Provider](https://github.com/reduxjs/react-redux/blob/HEAD/docs/api.md#provider-store) component, which ensures the store instance to the context for its child components below.
+
+```jsx
+<Provider store={store}>
+  <App />
+</Provider>
+```
+
 ### Selectors
+
+### The extra arguments
 
 ### How Repatch works
 
 ### The state
+
+Ide vajon mit akartam írni?
 
 ## Creating an offline react app
 
