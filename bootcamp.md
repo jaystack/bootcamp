@@ -508,7 +508,7 @@ Mutability also can cause unnecessary rerenders. Always take care to handle the 
 
 #### The `PureComponent`
 
-We know functional components, `React.Component` and now we meet `React.PureComponent`. `PureComponent` is almost the same like the regulas `Component` baseclass, except that `PureComponent` has a builtin shallow check for the changing `props` and `state`. It's really useful and advisable to use, so **check this [documentation](https://reactjs.org/docs/react-api.html#reactpurecomponent) to understand it**.
+We know functional components, `React.Component` and now we meet `React.PureComponent`. `PureComponent` is almost the same like the regulas `Component` baseclass, except that `PureComponent` has a builtin shallow compare for the changing `props` and `state`. It's really useful and advisable to use, so **check this [documentation](https://reactjs.org/docs/react-api.html#reactpurecomponent) to understand it**.
 
 ### How Redux works
 
@@ -635,7 +635,159 @@ These containers takes the store instance from the [context](https://reactjs.org
 
 ### Selectors
 
-### The extra arguments
+Selectors are pure functions which takes the store's state as argument and return some data. Selectors usually select a slice of the state, but they are also available to make some computation on the state, eg. some transformation, aggregation, etc.
+
+Very important, that components must be free from any business logic computation or transformation, and also they must be independent from the raw state. The best is when your components take ready-to-display data in their props.
+
+Selectors are the bridge between the application state and the components' input. They also have other advantages, such as:
+
+- They are reusable for building complex selectors.
+- They are suitable for unit-testing, because they are pure functions.
+- Memoized selectors can avoid unnecessary computations and rerenders.
+- They can save us from refactoring components when state structure changes.
+
+Redux developers say, that the business logic live in the reducers, and also in the selectors. Selectors are the opposite way from the data instead of like reducers do, and usually we implement them in a separated file or folder.
+
+Selectors are used mostly at `mapStateToProps`, but we can use them also in thunks.
+
+Suppose, that we have the following state
+
+```js
+{
+  me: {
+    firstName: 'John',
+    lastName: 'Smith'
+  },
+  items: [ 10, 20, 30, 40 ]
+}
+```
+
+Then we can write the following selectors:
+
+```js
+const getMe = state => state.me
+const getItems = state => state.items
+const getMyName = state => {
+  const { firstName, lastName } = getMe(state)
+  return `${firstName} ${lastName}`
+}
+const getSumOfItems = state => {
+  const items = getItems(state)
+  return items.reduce((sum, item) => sum + item)
+}
+```
+
+And then we can connect them into components:
+
+```jsx
+import { getMyName, getItems, getSumOfItems } from '../selectors'
+
+@connect(state => ({
+  name: getMyName(state),
+  items: getItems(state),
+  sum: getSumOfItems(state)
+}))
+class extends React.PureComponent {
+  render() {
+    const { name, items, sum } = this.props
+    return <div>
+      <h1>My name is: {name}</h1>
+      <h2>Sum is: {sum}</h2>
+      <ul>
+        {items.map((item, i) => <li key={i}>{item}</li>)}
+      </ul>
+    </div>
+  }
+}
+```
+
+What if the name changes? The container invokes the `mapStateToProps` and it invokes our selectors. The `getMyName` will return the new name, this is ok. But unfortunately `getSumOfItems` will be also invoked and unnecessarily computes the sum of the items again. It does not seem like a big effort, but if the selector does some harder comutation, then it could be really inefficient.
+
+#### Reselect
+
+For this purpose the react team provides the [reselect](https://www.npmjs.com/package/reselect) package. How it works?
+
+```js
+import { createSelector } from 'reselect'
+
+const getMe = state => state.me
+const getItems = state => state.items
+const getMyName = createSelector(
+  getMe,
+  ({ firstName, lastName }) => `${firstName} ${lastName}`
+)
+const getSumOfItems = createSelector(
+  getItems,
+  items => items.reduce((sum, item) => sum + item)
+)
+```
+
+Selectors created by `createSelector` will be memoized selectors, which means they persist the previous return value of their input selectors. If the input selectors do not produce any change, the selector will return the previous value. Therefore the selector runs only when the input data changes.
+
+If you'd like to use more selectors as input data, then you shall use an array of selectors as the first argument:
+
+```js
+const getSurface = createSelector(
+  [getWidth, getHeight],
+  (width, height) => width * height
+)
+```
+
+#### Parameterized selectors
+
+It seems obvious, that if we need free parameters in our selectors then we make a curry:
+
+```js
+const getSumFrom = index => createSelector(
+  getItems,
+  items => items.slice(index).reduce((sum, item) => sum + item)
+)
+```
+
+And then:
+
+```js
+@connect((state, { index }) => ({ sum: getSumFrom(index)(state) }))
+```
+
+But if you look at this a bit deeper, then you could find that this solution misfits the selectors power: the memoization, because this curry will create always a new selector won't keep the previous selector's state.
+
+So how can we deal with this problem? Notice that the signature of `mapStateToProps` looks like this:
+
+```
+(state, props) => finalProps
+```
+
+So we can use directly the `props` as parameters, or we can pass to the selectors false props as second argument.
+
+```js
+const getSumFrom = createSelector(
+  [getItems, (_, index) => index],
+  (items, index) => items.slice(index).reduce((sum, item) => sum + item)
+)
+```
+
+And then
+
+```js
+@connect((state, { index }) => ({ sum: getSumFrom(state, index) }))
+```
+
+or just
+
+```js
+@connect((state) => ({ sum: getSumFrom(state, 2) }))
+```
+
+If we need more parameters than one, we can use parameter objects.
+
+```js
+@connect((state) => ({ sum: getSumFrom(state, { from: 2, to : 7 }) }))
+```
+
+### Thunks
+
+#### The extra arguments
 
 ### How Repatch works
 
