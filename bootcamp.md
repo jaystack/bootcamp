@@ -724,7 +724,7 @@ const getSumOfItems = createSelector(
 
 Selectors created by `createSelector` will be memoized selectors, which means they persist the previous return value of their input selectors. If the input selectors do not produce any change, the selector will return the previous value. Therefore the selector runs only when the input data changes.
 
-If you'd like to use more selectors as input data, then you shall use an array of selectors as the first argument:
+If you'd like to use more selectors as input data, then you shall pass an array of selectors as the first argument:
 
 ```js
 const getSurface = createSelector(
@@ -750,7 +750,7 @@ And then:
 @connect((state, { index }) => ({ sum: getSumFrom(index)(state) }))
 ```
 
-But if you look at this a bit deeper, then you could find that this solution misfits the selectors power: the memoization, because this curry will create always a new selector won't keep the previous selector's state.
+But if you look at this a bit deeper, then you could find that this solution misfits the selectors power: the memorization, because this curry will create always a new selector and it won't keep the previous selector's state.
 
 So how can we deal with this problem? Notice that the signature of `mapStateToProps` looks like this:
 
