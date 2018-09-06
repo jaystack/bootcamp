@@ -637,7 +637,7 @@ These containers takes the store instance from the [context](https://reactjs.org
 
 Selectors are pure functions which takes the store's state as argument and return some data. Selectors usually select a slice of the state, but they are also available to make some computation on the state, eg. some transformation, aggregation, etc.
 
-Very important, that components must be free from any business logic computation or transformation, and also they must be independent from the raw state. The best is when your components take ready-to-display data in their props.
+**Very important, that components must be free from any business logic computation or transformation, and also they must be independent from the raw state.** The best is when your components take ready-to-display data in their props.
 
 Selectors are the bridge between the application state and the components' input. They also have other advantages, such as:
 
@@ -787,7 +787,33 @@ If we need more parameters than one, we can use parameter objects.
 
 ### Thunks
 
-#### The extra arguments
+When we are talking about thunks, we usually refer to asynchronous event handling. Indeed, the most of usecases are there, but thunks are not just about this. Before we discuss about thunks general role, let's see how they look like.
+
+Until this moment actions were simple objects with a type property and some payload, and action creators were helpers (pure functions), which create the actions.
+
+```js
+const updateName = name => ({ type: UPDATE_NAME, name })
+```
+
+When we dispatch an action, we send an action object to the store.
+
+Thunks are a bit different. They are actions, but not regular actions. They are functions:
+
+```js
+const fetchName = userId => (dispatch, getState, { api }) => {
+  if (!!getState().name) return
+  const { name } = await api.get(`users/${userId}`)
+  dispatch(updateName(name))
+}
+```
+
+So how they work? [redux-thunk](https://www.npmjs.com/package/redux-thunk) is a middleware in the redux store, which handles the incoming function-based actions, the thunks. So if it detects the incoming action is a function, the middleware invokes it with the `dispatch`, `getState` functions and with the extra arguments.
+
+#### The extra arguments and side-effects
+
+The extra arguments are the key points at thunks. Without them thunks cannot be able to carry out their job. Because the extra arguments ship the side-effects into thunks, and **thunks actually are the side-effect handlers** in a redux application. To inject side-effects into thunks, redux-thunk ensures a way: the `extraArguments`, what you can define at creating the middleware.
+
+
 
 ### How Repatch works
 
