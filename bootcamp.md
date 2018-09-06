@@ -12,19 +12,19 @@ The purpose of this bootcamp note is to gain practice in fullstack JavaScript de
 - Docker basics
 - Mongo basics
 - AWS basics
-- Continous integration
+- Continuous integration
 
-This way we will create a simple webapplication. After then we will create a node rest api with MongoDB, which could be used by the application. When the app and the api are ready, they will move in docker containers, and they well be able to deploy to AWS ECS.
+This way we will create a simple web application. After then we will create a node rest api with MongoDB, which could be used by the application. When the app and the api are ready, they will move in docker containers, and they well be able to deploy to AWS ECS.
 
 ## Javascript
 
-Javascript is a single threaded asynchronous script langugage runned by interpreters, such as V8 or Chakra. The popularity of javascript based on that it's running on many platforms: in every browsers, on server side by NodeJS, in mobile applications by React Native, in IOT devices, etc. The other important benefit of javascript is its functional nature. The functional features, such as high order functions, allow us to implement asynchronous behaviours easy, eg.: `onClick` callbacks, HTTP request handlers, etc.
+Javascript is a single threaded asynchronous script language run by interpreters, such as V8 or Chakra. The popularity of javascript based on that it's running on many platforms: in every browsers, on server side by NodeJS, in mobile applications by React Native, in IOT devices, etc. The other important benefit of javascript is its functional nature. The functional features, such as high order functions, allow us to implement asynchronous behaviour easy, eg.: `onClick` callbacks, HTTP request handlers, etc.
 
 **Check your javascript skills by our [questionaire](https://community.risingstack.com/repatch-the-simplified-redux/)!**
 
 ### The ECMAScript standards
 
-In accordance with the popularity of Javascript, this is a dynamically evolving language. The ECMAScript is the Javascript standard by the ECMA international. The association publishes an extension of the language in every year. You can always check the [kangax compatibility table](http://kangax.github.io/compat-table/es2016plus/) to ensuring which features are supported in your choosed platform.
+In accordance with the popularity of Javascript, this is a dynamically evolving language. The ECMAScript is the Javascript standard by the ECMA international. The association publishes an extension of the language in every year. You can always check the [kangax compatibility table](http://kangax.github.io/compat-table/es2016plus/) to ensure which features are supported in your chosen platform.
 
 ### Babel
 
@@ -38,7 +38,7 @@ This topic is too wide to explain in a brief paragraph. As I mentioned above jav
 
 ### Determinism
 
-Functional programming's primary trait is the determinism. What it means? If I have a function, which provides always the same output on the same input independently of its environment, we call this function as pure function, and pure functions are deterministic.
+Functional programming's primary trait is the determinism. What does it mean? If I have a function, which provides always the same output on the same input independently of its environment, we call this function as pure function, and pure functions are deterministic.
 
 The biggest part of a code is data transformation, and data transformations could be easily deterministic. I have some input data, and I want to create some output data. It is a simple projection between two data manifestation. The most simple computer program is a data transformation, and we can describe it as an data transformation or data projection. And the functions do this exactly:
 
@@ -62,7 +62,7 @@ and I modify this
 a = 2
 ```
 
-then I changed its value in the memory. If any part of our code relies on this variable I influenced its running, and I can cause some unexpected behaviour of the program. And unexpected behaviour does not match with definition of determinism. In a strongly asynchronous environment I can never be sure which kind of tasks are running in what order. **Undeterminism and unexpected behaviours is the devil himself and causes the most of bugs!**
+then I changed its value in the memory. If any part of our code relies on this variable I influenced its running, and I can cause some unexpected behaviour of the program. And unexpected behaviour does not match with definition of determinism. In a strongly asynchronous environment I can never be sure which kind of tasks are running in what order. **Undeterminism and unexpected behaviour is the devil himself and causes the most of bugs!**
 
 If I create an object
 
@@ -141,7 +141,7 @@ If I want to delete an item, I reduce a new one without this:
 
 ```js
 Object.keys(object).reduce(
-  (acc, key) => key !== unnecessaryKey { ...acc, [key]: object[key] } : acc)
+  (acc, key) => key !== unnecessaryKey ? { ...acc, [key]: object[key] } : acc
   , {}
 )
 ```
@@ -259,7 +259,7 @@ The `.some()` implements a simple OR behavior on items with a predicate function
 
 ```js
 const numbers = [null, null, 10, null, 30]
-const isThereValidNumbers = numbers.some(number => Number.isFinite(number)) // true
+const isThereValidNumbers = numbers.some(Number.isFinite) // true
 ```
 
 ##### `.every()`
@@ -268,12 +268,12 @@ The `.every()` implements a simple AND behavior on items with a predicate functi
 
 ```js
 const numbers = [null, null, 10, null, 30]
-const everyNumberisValid = numbers.every(number => Number.isFinite(number)) // false
+const everyNumberIsValid = numbers.every(Number.isFinite) // false
 ```
 
 ### The state
 
-Why can we say, this is true only on the simple programs. Because in these cases the program has no state. The state brings the compilcation, and every application has some state. A webapplication obviously has state. A REST data service has definitly not, but only in an optimistic world. The real life always works with states.
+Why can we say, this is true only on the simple programs. Because in these cases the program has no state. The state brings the complication, and every application has some state. A web application obviously has state. A REST data service has definitely not, but only in an optimistic world. The real life always works with states.
 
 Then how can we adapt our functional projecting pattern including the state. We can curve our previous figure to this:
 
@@ -469,7 +469,7 @@ We call them functional components, because they written as simple pure function
 
 The virtual dom is an immutable data structure as the `React.createElement` is a pure immutable function. So if you have not thought so far, rendering is a computationally job.
 
-Therefore in a well-written react application we try to avoid unnecessary rerenders. The pricinple is simple: needed to know in every component when the input data - props (and state) - really changes.
+Therefore in a well-written react application we try to avoid unnecessary rerenders. The principle is simple: needed to know in every component when the input data - props (and state) - really changes.
 
 Suppose that we have a simple state in a component:
 
@@ -508,7 +508,7 @@ Mutability also can cause unnecessary rerenders. Always take care to handle the 
 
 #### The `PureComponent`
 
-We know functional components, `React.Component` and now we meet `React.PureComponent`. `PureComponent` is almost the same like the regulas `Component` baseclass, except that `PureComponent` has a builtin shallow compare for the changing `props` and `state`. It's really useful and advisable to use, so **check this [documentation](https://reactjs.org/docs/react-api.html#reactpurecomponent) to understand it**.
+We know functional components, `React.Component` and now we meet `React.PureComponent`. `PureComponent` is almost the same like the regular `Component` baseclass, except that `PureComponent` has a builtin shallow compare for the changing `props` and `state`. It's really useful and advisable to use, so **check this [documentation](https://reactjs.org/docs/react-api.html#reactpurecomponent) to understand it**.
 
 ### How Redux works
 
@@ -559,7 +559,7 @@ Of course usually you write a bit more complicated reducers with `switch-case` s
 
 #### Combining reducers
 
-What if we'd like to combinate multiple reducers into one root reducer? Suppose that we have the following state:
+What if we'd like to combine multiple reducers into one root reducer? Suppose that we have the following state:
 
 ```js
 {
@@ -701,7 +701,7 @@ class extends React.PureComponent {
 }
 ```
 
-What if the name changes? The container invokes the `mapStateToProps` and it invokes our selectors. The `getMyName` will return the new name, this is ok. But unfortunately `getSumOfItems` will be also invoked and unnecessarily computes the sum of the items again. It does not seem like a big effort, but if the selector does some harder comutation, then it could be really inefficient.
+What if the name changes? The container invokes the `mapStateToProps` and it invokes our selectors. The `getMyName` will return the new name, this is ok. But unfortunately `getSumOfItems` will be also invoked and unnecessarily computes the sum of the items again. It does not seem like a big effort, but if the selector does some harder computation, then it could be really inefficient.
 
 #### Reselect
 
